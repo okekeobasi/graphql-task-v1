@@ -16,7 +16,7 @@ module Types
     # Calculate Price method
     def calculate_price(type:, margin:, exchange_rate:)
       # Get the current price of bitcoin
-      bitcoin_rate = get_bitcoin_price(exchange_rate)
+      bitcoin_rate = Coindesk.get_bitcoin_price(exchange_rate)
 
       # Calculate the margin percentage
       margin_percentage = margin / 100
@@ -29,15 +29,6 @@ module Types
         # Throw a GraphQL error
         GraphQL::ExecutionError.new('Type must be either Buy or Sell')
       end
-    end
-
-    # The function to get the current price of bitcoin
-    def get_bitcoin_price(exchange_rate)
-      # Using the Faraday gem for http requests
-      res = Faraday.get "https://api.coindesk.com/v1/bpi/currentprice/#{exchange_rate}.json"
-
-      # Parse the JSON response adn get the rate in float
-      Oj.load(res.body)['bpi'][exchange_rate]['rate_float']
     end
   end
 end
