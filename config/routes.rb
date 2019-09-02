@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  if Rails.env.development?
+  if Rails.env.development? || Rails.env.staging?
     # GraphQL Interface
     mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
   end
