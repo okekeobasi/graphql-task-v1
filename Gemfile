@@ -61,7 +61,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Graphql gem
-gem 'graphiql-rails', group: :development
+gem 'graphiql-rails'
 gem 'graphql'
 
 # Faraday gem for http requests
